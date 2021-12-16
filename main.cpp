@@ -10,11 +10,24 @@ struct ListNode {
   ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+ListNode* Advance(ListNode* item, int step) {
+  while (0 < step-- && item) {
+    item = item->next;
+  }
+  return item;
+}
+
 class Solution {
  public:
   ListNode *middleNode(ListNode *head) {
-    // FIXME
-    return nullptr;
+    ListNode *slow = head, *fast = head->next;
+    int length = 0;
+    while (fast) {
+      slow = Advance(slow, 1);
+      fast = Advance(fast, 2);
+    }
+
+    return slow;
   }
 };
 
